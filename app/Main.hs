@@ -59,3 +59,48 @@ recurMax :: (Ord a) => [a] -> a
 recurMax [] = error "Max of an empty list."
 recurMax [x] = x
 recurMax (x:xs) = max' x (recurMax xs)
+
+
+replicate' :: Int -> a -> [a]
+replicate' n item
+    | n <= 0    = []
+    | otherwise = item : replicate' (n - 1) item
+
+range' :: Int -> Int -> [Int]
+range' start end
+    | start > end = []
+    | otherwise = start : range' (start + 1) end
+
+
+take' :: Int -> [a] -> [a]
+take' n _
+    | n <= 0 = []
+take' _ [] = []
+take' n (x:xs) = x : take' (n - 1) xs
+
+
+reverse' :: [a] -> [a]
+reverse' [] = []
+reverse' (x:xs) = reverse' xs ++ [x]
+
+repeat' :: a -> [a]
+repeat' item = item : repeat' item
+
+zip' :: [a] -> [b] -> [(a, b)]
+zip' _ [] = []
+zip' [] _ = []
+zip' (x:xs) (y:ys) = (x, y) : zip' xs ys
+
+
+elem' :: (Eq a) => a -> [a] -> Bool
+elem' _ [] = False
+elem' item (x:xs) 
+    | item == x = True
+    | otherwise = item `elem'` xs
+
+quicksort :: (Ord a) => [a] -> [a]
+quicksort [] = []
+quicksort (x:xs) = 
+    let smallerOrEqual = [a | a <- xs, a <= x]
+        larger = [a | a <- xs, a > x]
+        in quicksort smallerOrEqual ++ [x] ++ quicksort larger
