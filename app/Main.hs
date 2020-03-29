@@ -48,3 +48,9 @@ head' (first:_) = first
 
 ageGroupByMonths :: Double -> String
 ageGroupByMonths monthsOld = ageGroupByYears (monthsOld/12)
+
+describeList :: [a] -> String
+describeList ls = "The list is " ++ kind ls
+  where kind [] = "empty."
+        kind [x] = "a singleton list."
+        kind xs = "a longer list."
