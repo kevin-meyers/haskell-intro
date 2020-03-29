@@ -16,3 +16,11 @@ factorial n = n * factorial (n - 1)
 
 addVectors  :: (Double, Double) -> (Double, Double) -> (Double, Double)
 addVectors (x1, y1) (x2, y2) = (x1 + x2, y1 + y2)
+
+sumPairs :: [(Int, Int)] -> [Int]
+sumPairs ls = [a + b | (a, b) <- ls]
+
+
+firstLetter :: String -> String
+firstLetter "" = ""
+firstLetter word@(first:remaining) = "The first letter of " ++ word ++ " is " ++ [first]
