@@ -35,3 +35,8 @@ ageGroup age
     | age < 18 = "Teen"
     | age < 60 = "Adult"
     | otherwise = "Elder"
+
+max' :: (Ord a) => a -> a -> a
+max' a b
+    | a <= b = b
+    | otherwise = a
