@@ -40,3 +40,8 @@ max' :: (Ord a) => a -> a -> a
 max' a b
     | a <= b = b
     | otherwise = a
+
+
+head' :: [a] -> a
+head' [] = error "List cannot be empty."
+head' (first:_) = first
