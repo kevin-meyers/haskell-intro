@@ -25,15 +25,15 @@ firstLetter "" = ""
 firstLetter word@(first:remaining) = "The first letter of " ++ word ++ " is " ++ [first]
 
 
-ageGroup :: Double -> String
-ageGroup age
-    | age < 0 = error "Age must be between 0 and 200"
-    | age > 200 = error "Age must be between 0 and 200" 
-    | age <= 1 = "Baby"
-    | age <= 3 = "Toddler"
-    | age < 13 = "Child"
-    | age < 18 = "Teen"
-    | age < 60 = "Adult"
+ageGroupByYears :: Double -> String
+ageGroupByYears years
+    | years < 0 = error "Age must be between 0 and 200"
+    | years > 200 = error "Age must be between 0 and 200" 
+    | years <= 1 = "Baby"
+    | years <= 3 = "Toddler"
+    | years < 13 = "Child"
+    | years < 18 = "Teen"
+    | years < 60 = "Adult"
     | otherwise = "Elder"
 
 max' :: (Ord a) => a -> a -> a
@@ -45,3 +45,6 @@ max' a b
 head' :: [a] -> a
 head' [] = error "List cannot be empty."
 head' (first:_) = first
+
+ageGroupByMonths :: Double -> String
+ageGroupByMonths monthsOld = ageGroupByYears (monthsOld/12)
