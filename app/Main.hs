@@ -54,3 +54,8 @@ describeList ls = "The list is " ++ kind ls
   where kind [] = "empty."
         kind [x] = "a singleton list."
         kind xs = "a longer list."
+
+recurMax :: (Ord a) => [a] -> a
+recurMax [] = error "Max of an empty list."
+recurMax [x] = x
+recurMax (x:xs) = max' x (recurMax xs)
