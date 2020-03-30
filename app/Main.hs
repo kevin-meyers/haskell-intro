@@ -108,3 +108,7 @@ quicksort (x:xs) =
 
 isUpper :: Char -> Bool
 isUpper = (`elem` ['A'..'Z'])
+
+
+applyTwice :: (a -> a) -> a -> a
+applyTwice f x = f (f x)
