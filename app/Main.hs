@@ -104,3 +104,7 @@ quicksort (x:xs) =
     let smallerOrEqual = [a | a <- xs, a <= x]
         larger = [a | a <- xs, a > x]
         in quicksort smallerOrEqual ++ [x] ++ quicksort larger
+
+
+isUpper :: Char -> Bool
+isUpper = (`elem` ['A'..'Z'])
