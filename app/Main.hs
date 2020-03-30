@@ -1,5 +1,5 @@
 module Main where
-
+import Math.NumberTheory.Primes
 import Lib
 
 main :: IO ()
@@ -122,3 +122,20 @@ zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
 
 makeAdder :: Int -> Int -> Int
 makeAdder a b = a + b
+
+
+flip' :: (a -> b -> c) -> b -> a -> c
+flip' f y x = f x y
+
+isPrime :: Int -> Bool
+isPrime k 
+    | k > 1 = null [ x | x <- [2..(round . sqrt . fromIntegral $ k)], k `mod` x == 0] 
+    | otherwise = False
+
+
+isFactorOf :: Integral a => a -> a -> Bool
+isFactorOf x n = n `mod` x == 0
+
+factorList :: Int -> [Int]
+factorList n = [10] ++ filter (flip isFactorOf $ n) [1 .. n `div` 2]
+

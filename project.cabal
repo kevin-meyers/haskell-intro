@@ -46,6 +46,7 @@ executable project-exe
   build-depends:
       base >=4.7 && <5
     , project
+    , arithmoi
   default-language: Haskell2010
 
 test-suite project-test
