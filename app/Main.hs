@@ -1,6 +1,7 @@
 module Main where
-import Math.NumberTheory.Primes
 import Lib
+import Data.List
+import Data.Char
 
 main :: IO ()
 main = putStrLn "Hello World!"
@@ -137,5 +138,29 @@ isFactorOf :: Integral a => a -> a -> Bool
 isFactorOf x n = n `mod` x == 0
 
 factorList :: Int -> [Int]
-factorList n = [10] ++ filter (flip isFactorOf $ n) [1 .. n `div` 2]
+factorList n = [n] ++ filter (flip isFactorOf n) [1 .. n `div` 2]
 
+primes :: [Int]
+primes = 2 : filter (null . tail . primeFactors) [3,5..]
+
+primeFactors :: Int -> [Int]
+primeFactors n = factor n primes
+  where
+    factor n (p:ps) 
+        | p*p > n        = [n]
+        | n `mod` p == 0 = p : factor (n `div` p) (p:ps)
+        | otherwise      =     factor n ps
+
+
+problem_12 = head $ filter ((>500) . nDivisors) (scanl1 (+) [1..])
+    where nDivisors n = product $ map ((+1) . length) (group (primeFactors n))
+
+digitSum :: Int -> Int
+digitSum = sum . map digitToInt . show
+
+
+collatz :: Int -> [Int]
+collatz 1 = [1]
+collatz n
+    | even n = n : collatz (n `div` 2)
+    | otherwise = n : collatz (3 * n + 1)
