@@ -215,3 +215,16 @@ isAmicable n = areAmicable n $ sumFactors n
 
 isPerfect :: Int -> Bool
 isPerfect n = n == sumFactors n
+
+isSorted :: (Ord a) => [a] -> Bool
+isSorted [a] = True
+isSorted (last:remaining)
+    | head remaining < last = False
+    | otherwise = isSorted remaining
+
+
+bubbleSort :: (Ord a) => [a] -> [a]
+bubbleSort [x] = [x]
+bubbleSort (x:y:xs)
+    | x < y = x : bubbleSort (y:xs)
+    | otherwise = y : bubbleSort (x:xs)
