@@ -158,7 +158,7 @@ primeFactors n = factor n primes
         | otherwise      =     factor n ps
 
 
-problem_12 = head $ filter ((>500) . nDivisors) (scanl1 (+) [1..])
+problem_12 = find ((>500) . nDivisors) (scanl1 (+) [1..])
     where nDivisors n = product $ map ((+1) . length) (group (primeFactors n))
 
 digitSum :: Int -> Int
@@ -228,3 +228,26 @@ bubbleSort [x] = [x]
 bubbleSort (x:y:xs)
     | x < y = x : bubbleSort (y:xs)
     | otherwise = y : bubbleSort (x:xs)
+
+getMin :: (Ord a) => [a] -> a
+getMin [m] = m
+getMin (m:x:xs)
+    | x > m = getMin $ m:xs
+    | otherwise = getMin $ x:xs
+
+removeItem :: (Ord a) => a -> [a] -> [a]
+removeItem _ [] = []
+removeItem item (x:xs)
+    | x == item = xs
+    | otherwise = x : removeItem item xs 
+
+selectionSort :: (Ord a) => [a] -> [a]
+selectionSort [] = []
+selectionSort l = minItem : selectionSort (removeItem minItem l)
+    where minItem = getMin l
+
+findKey :: (Eq k) => k -> [(k, v)] -> Maybe v
+findKey _ [] = Nothing
+findKey key ((k,v):xs)
+    | key == k = Just v
+    | otherwise = findKey key xs
