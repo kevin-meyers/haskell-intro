@@ -5,7 +5,6 @@ import           Data.List
 import           Data.Maybe                (fromJust)
 import qualified Data.Text                 as T
 import           Data.Text.Internal        (Text)
-import           Lib
 
 import           Text.Numeral.Grammar
 import           Text.Numeral.Language.ENG as EN
@@ -30,7 +29,7 @@ sumPairs ls = [a + b | (a, b) <- ls]
 firstLetter :: String -> String
 firstLetter "" = ""
 firstLetter word@(first:remaining) =
-  "The first letter of " ++ word ++ " is " ++ [first]
+    "The first letter of " ++ word ++ " is " ++ [first]
 
 ageGroupByYears :: Double -> String
 ageGroupByYears years
@@ -80,7 +79,7 @@ range' start end
 take' :: Int -> [a] -> [a]
 take' n _
   | n <= 0 = []
-take' _ [] = []
+  take' _ [] = []
 take' n (x:xs) = x : take' (n - 1) xs
 
 reverse' :: [a] -> [a]
@@ -104,9 +103,9 @@ elem' item (x:xs)
 quicksort :: (Ord a) => [a] -> [a]
 quicksort [] = []
 quicksort (x:xs) =
-  let smallerOrEqual = [a | a <- xs, a <= x]
-      larger = [a | a <- xs, a > x]
-   in quicksort smallerOrEqual ++ [x] ++ quicksort larger
+    let smallerOrEqual = [a | a <- xs, a <= x]
+        larger = [a | a <- xs, a > x]
+     in quicksort smallerOrEqual ++ [x] ++ quicksort larger
 
 isUpper :: Char -> Bool
 isUpper = (`elem` ['A' .. 'Z'])
@@ -128,7 +127,7 @@ flip' f y x = f x y
 isPrime :: Int -> Bool
 isPrime k
   | k > 1 =
-    null [x | x <- [2 .. (round . sqrt . fromIntegral $ k)], k `mod` x == 0]
+      null [x | x <- [2 .. (round . sqrt . fromIntegral $ k)], k `mod` x == 0]
   | otherwise = False
 
 isFactorOf :: Integral a => a -> a -> Bool
@@ -174,7 +173,7 @@ lengthFromNum num
   | otherwise = (+ 3) . countLetters . toEnglish $ num
 
 triangle =
-  [ [75]
+    [ [75]
   , [95, 64]
   , [17, 47, 82]
   , [18, 35, 87, 10]
@@ -189,7 +188,7 @@ triangle =
   , [91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48]
   , [63, 66, 04, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31]
   , [04, 62, 98, 27, 23, 09, 70, 98, 73, 93, 38, 53, 60, 04, 23]
-  ]
+    ]
 
 sumFactors :: Int -> Int
 sumFactors = sum . factorList
