@@ -1,13 +1,13 @@
 module Main where
 
-import           Data.Char
-import           Data.List
-import           Data.Maybe                (fromJust)
-import qualified Data.Text                 as T
-import           Data.Text.Internal        (Text)
+import Data.Char
+import Data.List
+import Data.Maybe (fromJust)
+import qualified Data.Text as T
+import Data.Text.Internal (Text)
 
-import           Text.Numeral.Grammar
-import           Text.Numeral.Language.ENG as EN
+import Text.Numeral.Grammar
+import Text.Numeral.Language.ENG as EN
 
 main :: IO ()
 main = putStrLn "Hello World!"
@@ -29,7 +29,7 @@ sumPairs ls = [a + b | (a, b) <- ls]
 firstLetter :: String -> String
 firstLetter "" = ""
 firstLetter word@(first:remaining) =
-    "The first letter of " ++ word ++ " is " ++ [first]
+  "The first letter of " ++ word ++ " is " ++ [first]
 
 ageGroupByYears :: Double -> String
 ageGroupByYears years
@@ -48,7 +48,7 @@ max' a b
   | otherwise = a
 
 head' :: [a] -> a
-head' []        = error "List cannot be empty."
+head' [] = error "List cannot be empty."
 head' (first:_) = first
 
 ageGroupByMonths :: Double -> String
@@ -57,13 +57,13 @@ ageGroupByMonths monthsOld = ageGroupByYears (monthsOld / 12)
 describeList :: [a] -> String
 describeList ls = "The list is " ++ kind ls
   where
-    kind []  = "empty."
+    kind [] = "empty."
     kind [x] = "a singleton list."
-    kind xs  = "a longer list."
+    kind xs = "a longer list."
 
 recurMax :: (Ord a) => [a] -> a
-recurMax []     = error "Max of an empty list."
-recurMax [x]    = x
+recurMax [] = error "Max of an empty list."
+recurMax [x] = x
 recurMax (x:xs) = max' x (recurMax xs)
 
 replicate' :: Int -> a -> [a]
@@ -80,19 +80,18 @@ take' :: Int -> [a] -> [a]
 take' _ [] = []
 take' n _
   | n <= 0 = []
-
 take' n (x:xs) = x : take' (n - 1) xs
 
 reverse' :: [a] -> [a]
-reverse' []     = []
+reverse' [] = []
 reverse' (x:xs) = reverse' xs ++ [x]
 
 repeat' :: a -> [a]
 repeat' item = item : repeat' item
 
 zip' :: [a] -> [b] -> [(a, b)]
-zip' _ []          = []
-zip' [] _          = []
+zip' _ [] = []
+zip' [] _ = []
 zip' (x:xs) (y:ys) = (x, y) : zip' xs ys
 
 elem' :: (Eq a) => a -> [a] -> Bool
@@ -104,9 +103,9 @@ elem' item (x:xs)
 quicksort :: (Ord a) => [a] -> [a]
 quicksort [] = []
 quicksort (x:xs) =
-    let smallerOrEqual = [a | a <- xs, a <= x]
-        larger = [a | a <- xs, a > x]
-     in quicksort smallerOrEqual ++ [x] ++ quicksort larger
+  let smallerOrEqual = [a | a <- xs, a <= x]
+      larger = [a | a <- xs, a > x]
+   in quicksort smallerOrEqual ++ [x] ++ quicksort larger
 
 isUpper :: Char -> Bool
 isUpper = (`elem` ['A' .. 'Z'])
@@ -115,8 +114,8 @@ applyTwice :: (a -> a) -> a -> a
 applyTwice f x = f (f x)
 
 zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
-zipWith' _ [] _          = []
-zipWith' _ _ []          = []
+zipWith' _ [] _ = []
+zipWith' _ _ [] = []
 zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
 
 makeAdder :: Int -> Int -> Int
@@ -128,7 +127,7 @@ flip' f y x = f x y
 isPrime :: Int -> Bool
 isPrime k
   | k > 1 =
-      null [x | x <- [2 .. (round . sqrt . fromIntegral $ k)], k `mod` x == 0]
+    null [x | x <- [2 .. (round . sqrt . fromIntegral $ k)], k `mod` x == 0]
   | otherwise = False
 
 isFactorOf :: Integral a => a -> a -> Bool
@@ -174,7 +173,7 @@ lengthFromNum num
   | otherwise = (+ 3) . countLetters . toEnglish $ num
 
 triangle =
-    [ [75]
+  [ [75]
   , [95, 64]
   , [17, 47, 82]
   , [18, 35, 87, 10]
@@ -189,7 +188,7 @@ triangle =
   , [91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48]
   , [63, 66, 04, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31]
   , [04, 62, 98, 27, 23, 09, 70, 98, 73, 93, 38, 53, 60, 04, 23]
-    ]
+  ]
 
 sumFactors :: Int -> Int
 sumFactors = sum . factorList
@@ -238,4 +237,11 @@ selectionSort l = minItem : selectionSort (removeItem minItem l)
 
 findKey :: (Eq k) => k -> [(k, v)] -> Maybe v
 findKey _ [] = Nothing
-findKey key xs = foldr (\(k, v) acc -> if key == k then Just v else acc) Nothing xs
+findKey key xs =
+  foldr
+    (\(k, v) acc ->
+       if key == k
+         then Just v
+         else acc)
+    Nothing
+    xs
