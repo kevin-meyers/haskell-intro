@@ -77,9 +77,10 @@ range' start end
   | otherwise = start : range' (start + 1) end
 
 take' :: Int -> [a] -> [a]
+take' _ [] = []
 take' n _
   | n <= 0 = []
-  take' _ [] = []
+
 take' n (x:xs) = x : take' (n - 1) xs
 
 reverse' :: [a] -> [a]
@@ -237,6 +238,4 @@ selectionSort l = minItem : selectionSort (removeItem minItem l)
 
 findKey :: (Eq k) => k -> [(k, v)] -> Maybe v
 findKey _ [] = Nothing
-findKey key ((k, v):xs)
-  | key == k = Just v
-  | otherwise = findKey key xs
+findKey key xs = foldr (\(k, v) acc -> if key == k then Just v else acc) Nothing xs
