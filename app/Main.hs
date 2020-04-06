@@ -229,11 +229,20 @@ removeItem item (x:xs)
   | x == item = xs
   | otherwise = x : removeItem item xs
 
+tupleAppend :: a -> (a, [a]) -> (a, [a])
+tupleAppend x (m, xs) = (m, x : xs)
+
+removeReturnMin :: (Ord a) => [a] -> (a, [a])
+removeReturnMin [m] = (m, [])
+removeReturnMin (m:x:xs)
+  | x > m = tupleAppend x $ removeReturnMin $ m : xs
+  | otherwise = tupleAppend m $ removeReturnMin $ x : xs
+
 selectionSort :: (Ord a) => [a] -> [a]
 selectionSort [] = []
-selectionSort l = minItem : selectionSort (removeItem minItem l)
+selectionSort l = minItem : selectionSort remaining
   where
-    minItem = getMin l
+    (minItem, remaining) = removeReturnMin l
 
 findKey :: (Eq k) => k -> [(k, v)] -> Maybe v
 findKey _ [] = Nothing
@@ -245,3 +254,18 @@ findKey key xs =
          else acc)
     Nothing
     xs
+
+merge :: (Ord a) => [a] -> [a] -> [a]
+merge a [] = a
+merge [] b = b
+merge a@(a_o:as) b@(b_o:bs)
+  | a_o < b_o = a_o : merge as b
+  | otherwise = b_o : merge a bs
+
+mergeSort :: (Ord a) => [a] -> [a]
+mergeSort [] = []
+mergeSort [a] = [a]
+mergeSort a = merge (mergeSort firstHalf) (mergeSort secondHalf)
+  where
+    firstHalf = take ((`div` 2) . length $ a) a
+    secondHalf = drop ((`div` 2) . length $ a) a

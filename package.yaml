@@ -9,6 +9,7 @@ copyright:           "mit"
 extra-source-files:
 - README.md
 - ChangeLog.md
+- app/Geometry/
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
