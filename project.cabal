@@ -37,7 +37,7 @@ library
   default-language: Haskell2010
 
 executable project-exe
-  main-is: Main.hs 
+  main-is: Vector.hs
   other-modules:
       Paths_project
   hs-source-dirs:
