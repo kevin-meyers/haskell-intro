@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a57fd6aa5a96d981c4c2155817df221d4160760a0e040703bb9fa8f3d69ccc4b
+-- hash: 845f7088a235d845d8cd09ae7a00c742f5f97a750e4c843d518ba2916de14f2e
 
 name:           project
 version:        0.1.0.0
@@ -37,17 +37,24 @@ library
   default-language: Haskell2010
 
 executable project-exe
-  main-is: Vector.hs
+  main-is: Main.hs
   other-modules:
+      BinaryTree
+      DataTypes
+      Geometry.Cube
+      Geometry.Cuboid
+      Geometry.Sphere
+      MyList
+      Vector
       Paths_project
   hs-source-dirs:
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
-    , project
-    , arithmoi
+      arithmoi
+    , base >=4.7 && <5
     , numerals
+    , project
     , text
   default-language: Haskell2010
 

@@ -1,5 +1,4 @@
-main :: IO ()
-main = putStrLn "help"
+module DataTypes where
 
 data Car =
   Car

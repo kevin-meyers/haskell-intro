@@ -1,5 +1,8 @@
-main :: IO ()
-main = putStrLn "help"
+module Vector
+  ( vPlus
+  , dotProd
+  , vMult
+  ) where
 
 data Vector a =
   Vector a a a

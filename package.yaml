@@ -9,7 +9,6 @@ copyright:           "mit"
 extra-source-files:
 - README.md
 - ChangeLog.md
-- app/Geometry/
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
@@ -36,6 +35,9 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - project
+    - arithmoi
+    - numerals
+    - text
 
 tests:
   project-test:

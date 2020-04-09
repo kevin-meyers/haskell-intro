@@ -211,11 +211,16 @@ isSorted (last:remaining)
   | head remaining < last = False
   | otherwise = isSorted remaining
 
+bubbleUp :: (Ord a) => [a] -> [a]
+bubbleUp [] = []
+bubbleUp [x] = [x]
+bubbleUp (x:y:xs) = smaller : bubbleUp (larger : xs)
+  where
+    smaller = min x y
+    larger = max x y
+
 bubbleSort :: (Ord a) => [a] -> [a]
-bubbleSort [x] = [x]
-bubbleSort (x:y:xs)
-  | x < y = x : bubbleSort (y : xs)
-  | otherwise = y : bubbleSort (x : xs)
+bubbleSort l = foldl (\acc _ -> bubbleUp acc) l [0 .. length l]
 
 getMin :: (Ord a) => [a] -> a
 getMin [m] = m
@@ -269,3 +274,7 @@ mergeSort a = merge (mergeSort firstHalf) (mergeSort secondHalf)
   where
     firstHalf = take ((`div` 2) . length $ a) a
     secondHalf = drop ((`div` 2) . length $ a) a
+
+allPairs :: [a] -> [(a, a)]
+allPairs [] = []
+allPairs (x:xs) = [(x, num) | num <- xs] ++ allPairs xs

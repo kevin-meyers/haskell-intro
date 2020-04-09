@@ -1,5 +1,6 @@
-main :: IO ()
-main = putStrLn "help"
+module MyList
+  (
+  ) where
 
 infixr 5 :-:
 
