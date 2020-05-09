@@ -6,6 +6,8 @@ import Data.Maybe (fromJust)
 import qualified Data.Text as T
 import Data.Text.Internal (Text)
 
+import Data.Array (Array, listArray)
+
 import Text.Numeral.Grammar
 import Text.Numeral.Language.ENG as EN
 
@@ -278,3 +280,27 @@ mergeSort a = merge (mergeSort firstHalf) (mergeSort secondHalf)
 allPairs :: [a] -> [(a, a)]
 allPairs [] = []
 allPairs (x:xs) = [(x, num) | num <- xs] ++ allPairs xs
+
+intToDigits :: Int -> [Int]
+intToDigits = map digitToInt . show
+
+sumDigitsToPowerOf :: Int -> Int -> Int
+sumDigitsToPowerOf n m = sum $ map (^ n) $ intToDigits m
+
+twoSum :: Int -> [Int] -> Bool
+twoSum t ls = pairExists t ls $ reverse' ls
+
+pairExists :: Int -> [Int] -> [Int] -> Bool
+pairExists t ls@(lx:lxs) rs@(rx:rxs)
+  | lx <= rx =
+    case compare (lx + rx) t of
+      LT -> pairExists t lxs rs
+      EQ -> True
+      GT -> pairExists t ls rxs
+pairExists _ _ _ = False
+
+isAbundant :: Int -> Bool
+isAbundant n = sumFactors n > n
+
+abundArray :: Int -> Array Int Bool
+abundArray n = listArray (1, n) $ map isAbundant [1 .. n]
